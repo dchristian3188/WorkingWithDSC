@@ -22,6 +22,8 @@ New-Item -Path C:\SSL -ItemType Directory -ErrorAction SilentlyContinue
 $AllProtocols = [System.Net.SecurityProtocolType]'Ssl3,Tls,Tls11,Tls12'
 [System.Net.ServicePointManager]::SecurityProtocol = $AllProtocols
 Invoke-WebRequest -UseBasicParsing -Uri https://github.com/dchristian3188/WorkingWithDSC/raw/master/dscCert.pfx -OutFile C:\SSL\dscCert.pfx -Verbose
+Invoke-WebRequest -UseBasicParsing -Uri https://github.com/dchristian3188/WorkingWithDSC/raw/master/dsc.cer -OutFile C:\SSL\dsc.cer -Verbose
+
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\SSL\dscCert.pfx -Password (ConvertTo-SecureString -AsPlainText -Force  'SoCalPosh')
 
 #Required Packages
@@ -50,8 +52,8 @@ configuration NewDomain
 
         xComputer DCName
         {
-            Name = 'dc01'
-            Description =  "My First DC"
+            Name = $Node.ComputerName
+            Description = $Node.Role
         }
 
         File ADFiles            
@@ -82,7 +84,7 @@ configuration NewDomain
             SafemodeAdministratorPassword = $domainCred            
             DatabasePath = 'C:\NTDS'            
             LogPath = 'C:\NTDS'            
-            DependsOn = "[WindowsFeature]ADDSInstall","[File]ADFiles","[User]LocalAdmin","[xComputer],DCName" 
+            DependsOn = "[WindowsFeature]ADDSInstall","[File]ADFiles","[User]LocalAdmin","[xComputer]DCName" 
         }            
             
     }             
@@ -92,7 +94,8 @@ configuration NewDomain
 $ConfigData = @{             
     AllNodes = @(             
         @{             
-            Nodename = "localhost"             
+            Nodename = "localhost"
+            ComputerName = 'DC01'      
             Role = "Primary DC"             
             DomainName = "socalPosh.com"             
             RetryCount = 20              

@@ -1,0 +1,74 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "DC01": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "Tags": [{
+                    "Key": "Name",
+                    "Value": "DC01"
+                }],
+                "ImageId": "ami-b2e756ca",
+                "AvailabilityZone": "us-west-2a",
+                "InstanceType": "t2.micro",
+                "SecurityGroupIds": [
+                    "sg-6167211e"
+                ],
+                "KeyName": "dscKey",
+                "PrivateIpAddress": "172.31.16.10",
+                "SubnetId": "subnet-0879b171"
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "8a4aeb29-f057-4c88-845b-90054b271c2b"
+                }
+            }
+        },
+        "DSCPull": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "Tags": [{
+                    "Key": "Name",
+                    "Value": "DSCPull"
+                }],
+                "ImageId": "ami-b2e756ca",
+                "AvailabilityZone": "us-west-2a",
+                "InstanceType": "t2.micro",
+                "SecurityGroupIds": [
+                    "sg-6167211e"
+                ],
+                "KeyName": "dscKey",
+                "PrivateIpAddress": "172.31.16.15",
+                "SubnetId": "subnet-0879b171"
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "c11270cf-44a4-41ec-98c0-09d6481addfb"
+                }
+            }
+        },
+        "Web01": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "Tags": [{
+                    "Key": "Name",
+                    "Value": "Web01"
+                }],
+                "ImageId": "ami-b2e756ca",
+                "AvailabilityZone": "us-west-2a",
+                "InstanceType": "t2.micro",
+                "SecurityGroupIds": [
+                    "sg-6167211e"
+                ],
+                "KeyName": "dscKey",
+                "PrivateIpAddress": "172.31.16.20",
+                "SubnetId": "subnet-0879b171"
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "63e6354e-373f-4742-9dd4-53186672fe0b"
+                }
+            }
+        }
+    }
+}
