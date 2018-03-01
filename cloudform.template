@@ -24,6 +24,29 @@
                 }
             }
         },
+        "DC02": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "Tags": [{
+                    "Key": "Name",
+                    "Value": "DC02"
+                }],
+                "ImageId": "ami-b2e756ca",
+                "AvailabilityZone": "us-west-2a",
+                "InstanceType": "t2.micro",
+                "SecurityGroupIds": [
+                    "sg-6167211e"
+                ],
+                "KeyName": "dscKey",
+                "PrivateIpAddress": "172.31.16.11",
+                "SubnetId": "subnet-0879b171"
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "8edf6087-97d7-44e9-bf97-c3f5092e5800"
+                }
+            }
+        },
         "DSCPull": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
