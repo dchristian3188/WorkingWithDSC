@@ -27,8 +27,8 @@ Invoke-WebRequest -UseBasicParsing -Uri https://github.com/dchristian3188/Workin
 Import-PfxCertificate -CertStoreLocation Cert:\LocalMachine\My -FilePath C:\SSL\dscCert.pfx -Password (ConvertTo-SecureString -AsPlainText -Force  'SoCalPosh')
 
 #Required Packages
-Install-PackageProvider -Name Nuget -Force -Verbose
-Install-Module -Name xActiveDirectory, xComputerManagement -Force -Verbose
+Install-PackageProvider -Name Nuget -Force
+Install-Module -Name xActiveDirectory, xComputerManagement -Force
 
 configuration NewDomain             
 {             
@@ -42,7 +42,7 @@ configuration NewDomain
     Import-DscResource -ModuleName xActiveDirectory             
     Import-DscResource -ModuleName xComputerManagement
             
-    Node $AllNodes.Where{$_.Role -eq "Primary DC"}.Nodename             
+    Node localhost             
     { 
         User LocalAdmin
         {
@@ -69,14 +69,12 @@ configuration NewDomain
             Name = "AD-Domain-Services"             
         }            
             
-        # Optional GUI tools            
         WindowsFeature ADDSTools            
         {             
             Ensure = "Present"             
             Name = "RSAT-ADDS"             
         }            
             
-        # No slash at end of folder paths            
         xADDomain FirstDS             
         {             
             DomainName = $Node.DomainName             
@@ -97,7 +95,7 @@ $ConfigData = @{
             Nodename = "localhost"
             ComputerName = 'DC01'      
             Role = "Primary DC"             
-            DomainName = "socalPosh.com"             
+            DomainName = "socalpowershell.local"             
             RetryCount = 20              
             RetryIntervalSec = 30
             Thumbprint = 'BB08E3DAA9227667D85988C55C7D6A8711226357'
@@ -138,5 +136,5 @@ $DSCSPlat = @{
 }
 NewDomain @DSCSPlat   
                        
-# Build the domain            
+     
 Start-DscConfiguration -Wait -Force -Path C:\PS -Verbose       
