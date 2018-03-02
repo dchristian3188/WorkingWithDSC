@@ -10,7 +10,7 @@
                 }],
                 "ImageId": "ami-b2e756ca",
                 "AvailabilityZone": "us-west-2a",
-                "InstanceType": "t2.micro",
+                "InstanceType": "t2.medium",
                 "SecurityGroupIds": [
                     "sg-6167211e"
                 ],
@@ -33,7 +33,7 @@
                 }],
                 "ImageId": "ami-b2e756ca",
                 "AvailabilityZone": "us-west-2a",
-                "InstanceType": "t2.micro",
+                "InstanceType": "t2.medium",
                 "SecurityGroupIds": [
                     "sg-6167211e"
                 ],
@@ -56,7 +56,7 @@
                 }],
                 "ImageId": "ami-b2e756ca",
                 "AvailabilityZone": "us-west-2a",
-                "InstanceType": "t2.micro",
+                "InstanceType": "t2.medium",
                 "SecurityGroupIds": [
                     "sg-6167211e"
                 ],
@@ -79,7 +79,7 @@
                 }],
                 "ImageId": "ami-b2e756ca",
                 "AvailabilityZone": "us-west-2a",
-                "InstanceType": "t2.micro",
+                "InstanceType": "t2.medium",
                 "SecurityGroupIds": [
                     "sg-6167211e"
                 ],
