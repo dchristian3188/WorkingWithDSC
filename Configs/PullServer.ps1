@@ -14,7 +14,7 @@ configuration DscPullServer
 
     Node 'localhost'
     {
-        xComputer DCName
+        xComputer ComputerName
         {
             Name        = $node.ComputerName
             Description = $node.Role

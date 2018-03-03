@@ -1,4 +1,4 @@
-configuration DscPullServer
+configuration Web01Push
 {
     param
     (
@@ -12,7 +12,7 @@ configuration DscPullServer
 
     Node 'localhost'
     {
-        xComputer DCName
+        xComputer ComputerName
         {
             Name        = $node.ComputerName
             Description = $node.Role
@@ -75,9 +75,12 @@ $cred = New-Object -TypeName PSCredential -ArgumentList $username, $password
 
 $DSCSPlat = @{
     ConfigurationData = $ConfigData
-    OutputPath        = 'C:\PS'
+    OutputPath        = 'C:\PS\Web'
     DomainCred        = $cred
 }
-DscPullServer @DSCSPlat   
-                       
-Start-DscConfiguration -Wait -Force -Path C:\PS -Verbose       
+Web01Push @DSCSPlat   
+
+Move-Item -Path "C:\PS\Web\localhost.mof" -Destination "C:\PS\Web\172.31.16.20.mof"
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value * -Verbose -Force
+$remoteCred = Get-Credential -UserName Administrator -Message "Remote Cred"
+Start-DscConfiguration -Wait -Force -Path C:\PS\Web -Verbose  -ComputerName "172.31.16.20" -Credential $remoteCred
