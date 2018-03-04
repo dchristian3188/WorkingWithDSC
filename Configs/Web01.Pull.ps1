@@ -4,6 +4,7 @@ Configuration SoCalPoshWebSite
 {
     Import-DscResource -ModuleName xWebAdministration
     Import-DscResource -ModuleName PSDesiredStateConfiguration
+    Import-DscResource -ModuleName xPSDesiredStateConfiguration
     Node localhost
     {
         WindowsFeature WebServer 
@@ -58,6 +59,13 @@ Configuration SoCalPoshWebSite
              ApplicationPool = 'SoCalPosh'
              DependsOn = "[file]SoCalPoshRoot","[xWebAppPool]SoCalPoshAppPool"
          }
+
+         xRemoteFile SoCalPoshHome
+         {
+             Uri = 'https://raw.githubusercontent.com/dchristian3188/WorkingWithDSC/master/SoCalPosh.html'
+             DestinationPath = 'C:\SoCalPosh\index.html'
+             DependsOn = '[file]SoCalPoshRoot'
+         }
     }
 }
 
@@ -66,4 +74,5 @@ SoCalPoshWebSite -OutputPath C:\PS\Configs\ -Verbose
 
 
 Move-Item -Path "C:\PS\Configs\localhost.mof" -Destination "C:\PS\Configs\SoCalPoshWebSite.mof" -Force
-Publish-DSCModuleAndMof -Source C:\PS\Configs\ -ModuleNameList 'xWebAdministration' -Verbose
+$dscModules = Get-DscResource | Select-Object -ExpandProperty Module -Unique
+Publish-DSCModuleAndMof -Source C:\PS\Configs\ -ModuleNameList $dscModules.Name -Verbose
