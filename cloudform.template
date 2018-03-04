@@ -16,7 +16,8 @@
                 ],
                 "KeyName": "dscKey",
                 "PrivateIpAddress": "172.31.16.10",
-                "SubnetId": "subnet-0879b171"
+                "SubnetId": "subnet-0879b171",
+                "UserData": "PHBvd2Vyc2hlbGw+SW52b2tlLUV4cHJlc3Npb24gKEludm9rZS1XZWJSZXF1ZXN0IC1Vc2VCYXNpY1BhcnNpbmcgLVVyaSBodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vZGNocmlzdGlhbjMxODgvV29ya2luZ1dpdGhEU0MvbWFzdGVyL0NvbmZpZ3MvYm9vdFN0cmFwLnBzMSkuQ29udGVudDwvcG93ZXJzaGVsbD4="
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -39,7 +40,8 @@
                 ],
                 "KeyName": "dscKey",
                 "PrivateIpAddress": "172.31.16.11",
-                "SubnetId": "subnet-0879b171"
+                "SubnetId": "subnet-0879b171",
+                "UserData": "PHBvd2Vyc2hlbGw+SW52b2tlLUV4cHJlc3Npb24gKEludm9rZS1XZWJSZXF1ZXN0IC1Vc2VCYXNpY1BhcnNpbmcgLVVyaSBodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vZGNocmlzdGlhbjMxODgvV29ya2luZ1dpdGhEU0MvbWFzdGVyL0NvbmZpZ3MvYm9vdFN0cmFwLnBzMSkuQ29udGVudDwvcG93ZXJzaGVsbD4="
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -62,7 +64,8 @@
                 ],
                 "KeyName": "dscKey",
                 "PrivateIpAddress": "172.31.16.15",
-                "SubnetId": "subnet-0879b171"
+                "SubnetId": "subnet-0879b171",
+                "UserData": "PHBvd2Vyc2hlbGw+SW52b2tlLUV4cHJlc3Npb24gKEludm9rZS1XZWJSZXF1ZXN0IC1Vc2VCYXNpY1BhcnNpbmcgLVVyaSBodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vZGNocmlzdGlhbjMxODgvV29ya2luZ1dpdGhEU0MvbWFzdGVyL0NvbmZpZ3MvYm9vdFN0cmFwLnBzMSkuQ29udGVudDwvcG93ZXJzaGVsbD4="
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -85,7 +88,8 @@
                 ],
                 "KeyName": "dscKey",
                 "PrivateIpAddress": "172.31.16.20",
-                "SubnetId": "subnet-0879b171"
+                "SubnetId": "subnet-0879b171",
+                "UserData": "PHBvd2Vyc2hlbGw+SW52b2tlLUV4cHJlc3Npb24gKEludm9rZS1XZWJSZXF1ZXN0IC1Vc2VCYXNpY1BhcnNpbmcgLVVyaSBodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vZGNocmlzdGlhbjMxODgvV29ya2luZ1dpdGhEU0MvbWFzdGVyL0NvbmZpZ3MvYm9vdFN0cmFwLnBzMSkuQ29udGVudDwvcG93ZXJzaGVsbD4="
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
