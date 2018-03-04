@@ -73,25 +73,6 @@ $ConfigData = @{
     )             
 }             
 
-[DSCLocalConfigurationManager()]
-configuration LCMConfig
-{
-    Node localhost
-    {
-        Settings
-        {
-            ActionAfterReboot = 'ContinueConfiguration'            
-            ConfigurationMode = 'ApplyOnly'            
-            RebootNodeIfNeeded = $true            
-            CertificateID = 'BB08E3DAA9227667D85988C55C7D6A8711226357'
-        }
-    }
-}
-
-LCMConfig -OutputPath C:\PS
-
-Set-DscLocalConfigurationManager -Path C:\PS -Verbose -Force
-
 $username = 'SoCalPowerShell\administrator'
 $password = ConvertTo-SecureString -String 'SoCalPosh!' -AsPlainText -Force
 $cred = New-Object -TypeName PSCredential -ArgumentList $username,$password

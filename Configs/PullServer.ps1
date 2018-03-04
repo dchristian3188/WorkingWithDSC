@@ -1,3 +1,7 @@
+#Required DSC Modules
+Install-Module xWebAdministration -Force 
+
+
 configuration DscPullServer
 {
     param
@@ -11,6 +15,7 @@ configuration DscPullServer
     Import-DscResource –ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName xComputerManagement
     Import-DscResource -ModuleName xNetworking
+    Import-DscResource -ModuleName xWebAdministration
 
     Node 'localhost'
     {
@@ -57,11 +62,39 @@ configuration DscPullServer
             DestinationPath = "$env:ProgramFiles\WindowsPowerShell\DscService\RegistrationKeys.txt"
             Contents        = $node.PullServerRegKey
         }
+
+        # IIS Tools
+        WindowsFeature WebManTools
+        {
+            Name = 'Web-Mgmt-Tools'
+            Ensure = 'Present'
+        }
+        WindowsFeature WebScriptTools
+        {
+            Name = 'Web-Scripting-Tools'
+            Ensure = 'Present'
+        }
+
+        #Cleanup Default Site
+        xWebsite RemoveDefaultSite
+        {
+            Name = 'Default Web Site'
+            Ensure = 'Absent'
+            DependsOn = '[xDscWebService]PSDSCPullServer'
+        }
+
+        xWebAppPool RemoveDefaultPool
+        {
+            Name = 'DefaultAppPool'
+            Ensure = 'Absent'
+            DependsOn = '[xWebsite]RemoveDefaultSite'
+        }
+
     }
 }
 
     
-# Configuration Data for AD              
+# Configuration Data for PullServer            
 $ConfigData = @{             
     AllNodes = @(             
         @{             
@@ -80,25 +113,6 @@ $ConfigData = @{
         }            
     )             
 }             
-
-[DSCLocalConfigurationManager()]
-configuration LCMConfig
-{
-    Node localhost
-    {
-        Settings
-        {
-            ActionAfterReboot  = 'ContinueConfiguration'            
-            ConfigurationMode  = 'ApplyOnly'            
-            RebootNodeIfNeeded = $true            
-            CertificateID      = 'BB08E3DAA9227667D85988C55C7D6A8711226357'
-        }
-    }
-}
-
-LCMConfig -OutputPath C:\PS
-
-Set-DscLocalConfigurationManager -Path C:\PS -Verbose -Force
 
 $username = 'SoCalPowerShell\administrator'
 $password = ConvertTo-SecureString -String 'SoCalPosh!' -AsPlainText -Force

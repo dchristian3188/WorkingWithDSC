@@ -30,7 +30,7 @@ Configuration SoCalPoshWebSite
              DependsOn = '[WindowsFeature]WebServer'
          }
 
-         xWebApplication RemoveDefaultPool
+         xWebAppPool RemoveDefaultPool
          {
              Name = 'DefaultAppPool'
              Ensure = 'Absent'
@@ -76,3 +76,5 @@ SoCalPoshWebSite -OutputPath C:\PS\Configs\ -Verbose
 Move-Item -Path "C:\PS\Configs\localhost.mof" -Destination "C:\PS\Configs\SoCalPoshWebSite.mof" -Force
 $dscModules = Get-DscResource | Select-Object -ExpandProperty Module -Unique
 Publish-DSCModuleAndMof -Source C:\PS\Configs\ -ModuleNameList $dscModules.Name -Verbose
+
+Invoke-Item -Path 'C:\Program Files\WindowsPowerShell\DscService'
