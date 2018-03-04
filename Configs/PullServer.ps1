@@ -66,27 +66,27 @@ configuration DscPullServer
         # IIS Tools
         WindowsFeature WebManTools
         {
-            Name = 'Web-Mgmt-Tools'
+            Name   = 'Web-Mgmt-Tools'
             Ensure = 'Present'
         }
         WindowsFeature WebScriptTools
         {
-            Name = 'Web-Scripting-Tools'
+            Name   = 'Web-Scripting-Tools'
             Ensure = 'Present'
         }
 
         #Cleanup Default Site
         xWebsite RemoveDefaultSite
         {
-            Name = 'Default Web Site'
-            Ensure = 'Absent'
+            Name      = 'Default Web Site'
+            Ensure    = 'Absent'
             DependsOn = '[xDscWebService]PSDSCPullServer'
         }
 
         xWebAppPool RemoveDefaultPool
         {
-            Name = 'DefaultAppPool'
-            Ensure = 'Absent'
+            Name      = 'DefaultAppPool'
+            Ensure    = 'Absent'
             DependsOn = '[xWebsite]RemoveDefaultSite'
         }
 

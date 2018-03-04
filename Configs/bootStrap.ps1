@@ -23,10 +23,11 @@ configuration LCMConfig
     {
         Settings
         {
-            ActionAfterReboot  = 'ContinueConfiguration'            
-            ConfigurationMode  = 'ApplyAndAutoCorrect'            
-            RebootNodeIfNeeded = $true            
-            CertificateID      = 'BB08E3DAA9227667D85988C55C7D6A8711226357'
+            RefreshFrequencyMins = 30
+            ActionAfterReboot    = 'ContinueConfiguration'            
+            ConfigurationMode    = 'ApplyAndAutoCorrect'            
+            RebootNodeIfNeeded   = $true            
+            CertificateID        = 'BB08E3DAA9227667D85988C55C7D6A8711226357'
         }
     }
 }

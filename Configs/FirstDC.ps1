@@ -1,6 +1,6 @@
 configuration NewDomain             
 {             
-   param             
+    param             
     (             
         [Parameter(Mandatory)]            
         [pscredential]
@@ -20,37 +20,37 @@ configuration NewDomain
 
         xComputer DCName
         {
-            Name = $Node.ComputerName
+            Name        = $Node.ComputerName
             Description = $Node.Role
         }
 
         File ADFiles            
         {            
             DestinationPath = 'C:\NTDS'            
-            Type = 'Directory'            
-            Ensure = 'Present'            
+            Type            = 'Directory'            
+            Ensure          = 'Present'            
         }            
                     
         WindowsFeature ADDSInstall             
         {             
             Ensure = "Present"             
-            Name = "AD-Domain-Services"             
+            Name   = "AD-Domain-Services"             
         }            
             
         WindowsFeature ADDSTools            
         {             
             Ensure = "Present"             
-            Name = "RSAT-ADDS"             
+            Name   = "RSAT-ADDS"             
         }
             
         xADDomain FirstDS             
         {             
-            DomainName = $Node.DomainName             
+            DomainName                    = $Node.DomainName             
             DomainAdministratorCredential = $domainCred             
             SafemodeAdministratorPassword = $domainCred            
-            DatabasePath = 'C:\NTDS'            
-            LogPath = 'C:\NTDS'            
-            DependsOn = "[WindowsFeature]ADDSInstall","[File]ADFiles","[User]LocalAdmin","[xComputer]DCName" 
+            DatabasePath                  = 'C:\NTDS'            
+            LogPath                       = 'C:\NTDS'            
+            DependsOn                     = "[WindowsFeature]ADDSInstall", "[File]ADFiles", "[User]LocalAdmin", "[xComputer]DCName" 
         }            
             
     }             
@@ -60,14 +60,14 @@ configuration NewDomain
 $ConfigData = @{             
     AllNodes = @(             
         @{             
-            Nodename = "localhost"
-            ComputerName = 'DC01'      
-            Role = "Primary DC"             
-            DomainName = "socalpowershell.local"             
-            RetryCount = 20              
-            RetryIntervalSec = 30
-            Thumbprint = 'BB08E3DAA9227667D85988C55C7D6A8711226357'
-            CertificateFile  = "C:\SSL\dsc.cer"
+            Nodename             = "localhost"
+            ComputerName         = 'DC01'      
+            Role                 = "Primary DC"             
+            DomainName           = "socalpowershell.local"             
+            RetryCount           = 20              
+            RetryIntervalSec     = 30
+            Thumbprint           = 'BB08E3DAA9227667D85988C55C7D6A8711226357'
+            CertificateFile      = "C:\SSL\dsc.cer"
             PSDscAllowDomainUser = $true              
         }            
     )             
@@ -75,13 +75,13 @@ $ConfigData = @{
 
 $username = 'SoCalPowerShell\administrator'
 $password = ConvertTo-SecureString -String 'SoCalPosh!' -AsPlainText -Force
-$cred = New-Object -TypeName PSCredential -ArgumentList $username,$password
+$cred = New-Object -TypeName PSCredential -ArgumentList $username, $password
 
 
 $DSCSPlat = @{
     ConfigurationData = $ConfigData
-    OutputPath = 'C:\PS'
-    DomainCred = $cred
+    OutputPath        = 'C:\PS'
+    DomainCred        = $cred
 }
 NewDomain @DSCSPlat   
                        

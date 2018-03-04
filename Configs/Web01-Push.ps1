@@ -31,7 +31,7 @@ configuration Web01Push
 }
 
     
-# Configuration Data for AD              
+# Configuration Data Web Push            
 $ConfigData = @{             
     AllNodes = @(             
         @{             

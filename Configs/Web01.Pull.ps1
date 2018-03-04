@@ -9,63 +9,63 @@ Configuration SoCalPoshWebSite
     {
         WindowsFeature WebServer 
         {
-            Name = 'Web-Server'
+            Name   = 'Web-Server'
             Ensure = 'Present'
         }
-         WindowsFeature WebManTools
-         {
-             Name = 'Web-Mgmt-Tools'
-             Ensure = 'Present'
-         }
-         WindowsFeature WebScriptTools
-         {
-             Name = 'Web-Scripting-Tools'
-             Ensure = 'Present'
-         }
+        WindowsFeature WebManTools
+        {
+            Name   = 'Web-Mgmt-Tools'
+            Ensure = 'Present'
+        }
+        WindowsFeature WebScriptTools
+        {
+            Name   = 'Web-Scripting-Tools'
+            Ensure = 'Present'
+        }
 
-         xWebsite RemoveDefaultSite
-         {
-             Name = 'Default Web Site'
-             Ensure = 'Absent'
-             DependsOn = '[WindowsFeature]WebServer'
-         }
+        xWebsite RemoveDefaultSite
+        {
+            Name      = 'Default Web Site'
+            Ensure    = 'Absent'
+            DependsOn = '[WindowsFeature]WebServer'
+        }
 
-         xWebAppPool RemoveDefaultPool
-         {
-             Name = 'DefaultAppPool'
-             Ensure = 'Absent'
-             DependsOn = '[xWebsite]RemoveDefaultSite'
-         }
+        xWebAppPool RemoveDefaultPool
+        {
+            Name      = 'DefaultAppPool'
+            Ensure    = 'Absent'
+            DependsOn = '[xWebsite]RemoveDefaultSite'
+        }
 
-         file SoCalPoshRoot
-         {
-             Type = 'Directory'
-             DestinationPath = 'C:\SoCalPosh'
-         }
+        file SoCalPoshRoot
+        {
+            Type            = 'Directory'
+            DestinationPath = 'C:\SoCalPosh'
+        }
 
-         xWebAppPool SoCalPoshAppPool
-         {
-             Name = 'SoCalPosh'
-             startMode = 'AlwaysRunning'
-             State = 'Started'
-             DependsOn = '[WindowsFeature]WebServer'
-         }
+        xWebAppPool SoCalPoshAppPool
+        {
+            Name      = 'SoCalPosh'
+            startMode = 'AlwaysRunning'
+            State     = 'Started'
+            DependsOn = '[WindowsFeature]WebServer'
+        }
 
-         xWebsite SoCalPoshWebSite
-         {
-             Name = 'SoCalPosh'
-             State = 'Started'
-             PhysicalPath = 'C:\SoCalPosh'
-             ApplicationPool = 'SoCalPosh'
-             DependsOn = "[file]SoCalPoshRoot","[xWebAppPool]SoCalPoshAppPool"
-         }
+        xWebsite SoCalPoshWebSite
+        {
+            Name            = 'SoCalPosh'
+            State           = 'Started'
+            PhysicalPath    = 'C:\SoCalPosh'
+            ApplicationPool = 'SoCalPosh'
+            DependsOn       = "[file]SoCalPoshRoot", "[xWebAppPool]SoCalPoshAppPool"
+        }
 
-         xRemoteFile SoCalPoshHome
-         {
-             Uri = 'https://raw.githubusercontent.com/dchristian3188/WorkingWithDSC/master/SoCalPosh.html'
-             DestinationPath = 'C:\SoCalPosh\index.html'
-             DependsOn = '[file]SoCalPoshRoot'
-         }
+        xRemoteFile SoCalPoshHome
+        {
+            Uri             = 'https://raw.githubusercontent.com/dchristian3188/WorkingWithDSC/master/SoCalPosh.html'
+            DestinationPath = 'C:\SoCalPosh\index.html'
+            DependsOn       = '[file]SoCalPoshRoot'
+        }
     }
 }
 

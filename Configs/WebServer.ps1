@@ -5,14 +5,14 @@ configuration PullClientConfigNames
     {
         Settings
         {
-            RefreshMode = 'Pull'
+            RefreshMode          = 'Pull'
             RefreshFrequencyMins = 30
-            RebootNodeIfNeeded = $true
+            RebootNodeIfNeeded   = $true
         }
         ConfigurationRepositoryWeb CONTOSO-PullSrv
         {
-            ServerURL = 'https://dscpull.socalpowershell.local'
-            RegistrationKey = 'a9ce9f62-4027-4f5a-bab4-7db451932f71'
+            ServerURL          = 'https://dscpull.socalpowershell.local'
+            RegistrationKey    = 'a9ce9f62-4027-4f5a-bab4-7db451932f71'
             ConfigurationNames = @('Web01')
         }
     }
