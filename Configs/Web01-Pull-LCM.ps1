@@ -15,7 +15,7 @@ configuration PullClientConfigNames
         ConfigurationRepositoryWeb SoCalPoshPullServer
         {
             ServerURL               = 'https://dscpull.socalpowershell.local/PSDSCPullServer.svc'
-            AllowUnsecureConnection = $true
+            AllowUnsecureConnection = $false
             RegistrationKey         = 'a9ce9f62-4027-4f5a-bab4-7db451932f71'
             ConfigurationNames      = 'SoCalPoshWebSite'
         }

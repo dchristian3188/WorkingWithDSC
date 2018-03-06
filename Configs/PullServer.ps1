@@ -13,19 +13,29 @@ configuration DscPullServer
 
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
     Import-DscResource –ModuleName PSDesiredStateConfiguration
+    Import-DscResource -ModuleName xActiveDirectory     
     Import-DscResource -ModuleName xComputerManagement
     Import-DscResource -ModuleName xNetworking
     Import-DscResource -ModuleName xWebAdministration
 
     Node 'localhost'
     {
+        xWaitForADDomain SocalPosh
+        {
+            DomainName           = "socalpowershell.local"
+            DomainUserCredential = $domainCred
+            RetryCount           = $Node.RetryCount
+            RetryIntervalSec     = $Node.RetryIntervalSec
+            DependsOn            = "[xDnsServerAddress]DnsServerAddress"
+        }
+        
         xComputer ComputerName
         {
             Name        = $node.ComputerName
             Description = $node.Role
             DomainName  = $node.DomainName
             Credential  = $domainCred
-            DependsOn   = "[xDnsServerAddress]DnsServerAddress"
+            DependsOn   = "[xDnsServerAddress]DnsServerAddress", "[xWaitForADDomain]SocalPosh"
         }
 
         xDnsServerAddress DnsServerAddress
